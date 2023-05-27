@@ -108,7 +108,40 @@ public class SReaderRESP {
             content.setContent(contentArray);
         }
     }
-
-    private void readStringBulk(ContentRESP content) {
+    /**
+     * This Java function reads a bulk string from a RESP protocol and sets it as
+     * the content of a given object.
+     * 
+     * @param content The parameter "content" is an object of type ContentRESP,
+     *                which is being passed as an argument to the method. The method
+     *                is expected to read a string from a stream and set it as the
+     *                content of the ContentRESP object.
+     */
+    private void readStringBulk(ContentRESP content) throws Exception {
+        int length = Integer.parseInt(readTextUntilCRLF());
+        String contentString = (length == -1) ? null : readText(length);
+        content.setContent(contentString);
+        readCRLF();
     }
+
+    /**
+     * This function reads a specified length of characters from an input stream and
+     * returns them as a string.
+     * 
+     * @param length The length parameter in the above code is an integer value that
+     *               specifies the number of characters to be read from the input
+     *               stream. The method reads characters from the input stream until
+     *               it has read the specified number of characters or until the end
+     *               of the stream is reached, whichever comes first.
+     * @return The method is returning a String that contains the characters read
+     *         from the inputStream p to the specified length.
+     */
+    private String readText(int length) throws IOException {
+        char[] buffer = new char[length];
+        for (int i = 0; i < length; i++) {
+            buffer[i] = (char) inputStream.read();
+        }
+        return new String(buffer);
+    }
+
 }
