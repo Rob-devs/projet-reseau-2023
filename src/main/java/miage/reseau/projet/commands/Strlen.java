@@ -39,30 +39,32 @@ public class Strlen implements Command {
 
 	@Override
 	public ContentRESP execute(ContentRESP request) {
-		ContentRESP[] requestData = (ContentRESP[]) request.getContent();
-		if (requestData.length < 2) {
-	    TypeRESP responseType = TypeRESP.ERROR;
-	    String errorMessage = LogBuilder.getArgumentsErrorMessage(commandName);
-	    ContentRESP errorResponse = new ContentRESP(responseType, errorMessage);
-	    return errorResponse;
-		}
+    ContentRESP[] requestData = (ContentRESP[]) request.getContent();
+    if (requestData.length < 2) {
+        TypeRESP responseType = TypeRESP.ERROR;
+        String errorMessage = LogBuilder.getArgumentsErrorMessage(commandName);
+        ContentRESP errorResponse = new ContentRESP(responseType, errorMessage);
+        return errorResponse;
+    }
 
-		String key = (String) requestData[1].getContent();
-		Value value = server.getStore().getData(key);
+    String key = (String) requestData[1].getContent();
+    Value value = server.getStore().getData(key);
 
-		if (value == null) {
-			return new ContentRESP(TypeRESP.INT, 0);
-		} else {
-			ContentRESP data = value.getValue();
-			TypeRESP responseType;
-			Object content;
-			if (data.getType() == TypeRESP.STRING_BULK) {
-    		String stringValue = (String) data.getContent();
-    		responseType = TypeRESP.INT;
-    		content = stringValue.length();
-		} else {
-				return new ContentRESP(TypeRESP.ERROR, "Erreur : Pas une String");
-			}
-		}
-	}
+    if (value == null) {
+        return new ContentRESP(TypeRESP.INT, 0);
+    } else {
+        ContentRESP data = value.getValue();
+        TypeRESP responseType;
+        Object content;
+        if (data.getType() == TypeRESP.STRING_BULK) {
+            String stringValue = (String) data.getContent();
+            responseType = TypeRESP.INT;
+            content = stringValue.length();
+            return new ContentRESP(responseType, content);
+        } else {
+            return new ContentRESP(TypeRESP.ERROR, "Erreur : Pas une String");
+        }
+    }
+}
+
 }
