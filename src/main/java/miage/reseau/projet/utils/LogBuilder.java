@@ -64,4 +64,27 @@ public class LogBuilder {
     public static String getKeyDoesNotExistMessage() {
         return "Key does not exist";
     }
+
+    /**
+     * The function returns a message indicating the number of clients and their
+     * connection status.
+     * 
+     * @param status  A String variable that represents the status of a client
+     *                connection. It can be either "CLIENT_CONNECT" or
+     *                "CLIENT_DISCONNECT".
+     * @param clients The number of clients connected to a server.
+     * @return The method returns a String message that includes the number of
+     *         clients and a status indicator (+ for connect, - for disconnect).
+     */
+    public static String getConnectionStatusMessage(String status, int clients) {
+        String message = "Clients : " + clients;
+
+        if (status.equals(Constants.CLIENT_CONNECT)) {
+            message += " [+]";
+        } else if (status.equals(Constants.CLIENT_DISCONNECT)) {
+            message += " [-]";
+        }
+
+        return message;
+    }
 }
