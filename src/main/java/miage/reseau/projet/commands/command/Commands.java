@@ -34,6 +34,25 @@ public class Commands {
     public void initializeCommands(Consumer<Commands> consumer) {
         consumer.accept(this);
     }
+    
+    /**
+     * This function adds a command to a list of available commands if it doesn't
+     * already exist.
+     * 
+     * @param command The parameter "command" is an object of type "Command" that
+     *                represents a command
+     *                to be added to a list of available commands.
+     */
+    public void addCommand(Command command) {
+
+        if (commands.stream()
+                .anyMatch(c -> c.getClass() == command.getClass())) {
+            System.out.println(LogBuilder.getCmdAlreadyExistsMessage(command.getClass().getSimpleName()));
+        } else {
+            commands.add(command);
+            System.out.println(LogBuilder.getCmdSuccessfulyAddedMessage(command.getClass().getSimpleName()));
+        }
+    }
 
     /**
      * This function executes a command based on a request and returns the response.
