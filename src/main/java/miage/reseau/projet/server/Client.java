@@ -28,6 +28,10 @@ public class Client implements Runnable {
      */
     @Override
     public void run() {
+
+        server.clientConnect();
+        System.out.println(LogBuilder.getConnectionStatusMessage(Constants.CLIENT_CONNECT, server.getClients()));
+
         try {
             ContentRESP clientRequest;
             ContentRESP serverResponse;
@@ -43,5 +47,8 @@ public class Client implements Runnable {
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
+
+        server.clientDisconnect();
+        System.out.println(LogBuilder.getConnectionStatusMessage(Constants.CLIENT_DISCONNECT, server.getClients()));
     }
 }
