@@ -16,4 +16,16 @@ public class Constants {
     // Other
     public static final String CLIENT_CONNECT = "CONNECTION";
     public static final String CLIENT_DISCONNECT = "DISCONNECTION";
+    
+    public static final String COMMAND_APPEND = "APPEND";
+    public static final String COMMAND_DECREMENT = "DECR";
+    public static final String COMMAND_INCREMENT = "INCR";
+    public static final String COMMAND_EXISTS = "EXISTS";
+    public static final String COMMAND_EXPIRE = "EXPIRE";
+    public static final String COMMAND_GET = "GET";
+    public static final String COMMAND_SET = "SET";
+    public static final String COMMAND_SETNX = "SETNX";
+    public static final String COMMAND_STRLEN = "STRLEN";
+    public static final String COMMAND_INFO = "INFO";
+    public static final String COMMAND_DELETE = "DEL";
 }
