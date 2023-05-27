@@ -87,4 +87,37 @@ public class LogBuilder {
 
         return message;
     }
+    
+    /**
+     * The function returns an error message with the correct number of arguments
+     * for a given command in a key-value store.
+     * 
+     * @param command a String representing the Redis command for which an error
+     *                message needs to be generated.
+     * @return The method is returning a String message that indicates the correct
+     *         number of arguments required for a given command. If the command is
+     *         not recognized, it returns a constant String "LOG_ERROR".
+     */
+    public static String getArgumentsErrorMessage(String command) {
+
+        String message = "Incorrect number of arguments : ";
+
+        switch (command) {
+            case Constants.COMMAND_DECREMENT:
+            case Constants.COMMAND_INCREMENT:
+            case Constants.COMMAND_GET:
+            case Constants.COMMAND_STRLEN:
+                return message + command + " [Key]";
+            case Constants.COMMAND_APPEND:
+            case Constants.COMMAND_SET:
+            case Constants.COMMAND_SETNX:
+                return message + command + " [Key] [Value]";
+            case Constants.COMMAND_EXISTS:
+                return message + command + " [Key] [Key2]...";
+            case Constants.COMMAND_EXPIRE:
+                return message + command + " [Key] [Seconds]";
+            default:
+                return "Invalid request entry";
+        }
+    }
 }
