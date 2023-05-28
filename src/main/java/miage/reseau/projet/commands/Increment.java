@@ -4,6 +4,9 @@ import miage.reseau.projet.server.Server;
 import miage.reseau.projet.server.Value;
 import miage.reseau.projet.utils.Constants;
 import miage.reseau.projet.utils.LogBuilder;
+
+import java.util.Arrays;
+
 import miage.reseau.projet.commands.command.Command;
 import miage.reseau.projet.resp.ContentRESP;
 import miage.reseau.projet.resp.TypeRESP;
@@ -20,8 +23,9 @@ public class Increment implements Command {
     /**
      * This function checks if a given request matches a specific command name.
      *
-     * @param request An object of type ContentRESP, which is being passed as a parameter to the
-     * matches() method.
+     * @param request An object of type ContentRESP, which is being passed as a
+     *                parameter to the
+     *                matches() method.
      * @return A boolean value is being returned.
      */
     @Override
@@ -38,8 +42,9 @@ public class Increment implements Command {
     public ContentRESP execute(ContentRESP request) {
         ContentRESP[] requestData = (ContentRESP[]) request.getContent();
         if (requestData.length < 2) {
-          ContentRESP errorResponse = new ContentRESP(TypeRESP.ERROR, LogBuilder.getArgumentsErrorMessage(commandName));
-          return errorResponse;
+            ContentRESP errorResponse = new ContentRESP(TypeRESP.ERROR,
+                    LogBuilder.getArgumentsErrorMessage(commandName));
+            return errorResponse;
         }
 
         String key = (String) requestData[1].getContent();
@@ -49,12 +54,12 @@ public class Increment implements Command {
         }
 
         try {
-          int oldValueContent = Integer.parseInt((String) oldValue.getValue().getContent());
-          int newValue = oldValueContent + 1;
-          ContentRESP newContent = new ContentRESP(TypeRESP.STRING_BULK, Integer.toString(newValue));
-          oldValue.setValue(newContent);
-          server.getStore().saveData(key, oldValue);
-          return newContent;
+            int oldValueContent = Integer.parseInt((String) oldValue.getValue().getContent());
+            int newValue = oldValueContent + 1;
+            ContentRESP newContent = new ContentRESP(TypeRESP.STRING_BULK, Integer.toString(newValue));
+            oldValue.setValue(newContent);
+            server.getStore().saveData(key, oldValue);
+            return newContent;
         } catch (NumberFormatException ignore) {
             ContentRESP errorResponse = new ContentRESP(TypeRESP.ERROR, "Erreur : Valeur non valide");
             return errorResponse;

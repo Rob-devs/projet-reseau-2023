@@ -9,8 +9,6 @@ import miage.reseau.projet.utils.Constants;
 import miage.reseau.projet.utils.LogBuilder;
 
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.IntStream;
 
 /**
  * Permet de connaitre le nombre de clés fournies en paramètre qui existent dans
@@ -28,8 +26,9 @@ public class Exists implements Command {
     /**
      * This function checks if a given request matches a specific command name.
      * 
-     * @param request An object of type ContentRESP, which is being passed as a parameter to the
-     * matches() method.
+     * @param request An object of type ContentRESP, which is being passed as a
+     *                parameter to the
+     *                matches() method.
      * @return A boolean value is being returned.
      */
     @Override

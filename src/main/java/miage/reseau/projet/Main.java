@@ -1,5 +1,16 @@
 package miage.reseau.projet;
 
+import miage.reseau.projet.commands.Append;
+import miage.reseau.projet.commands.Decrement;
+import miage.reseau.projet.commands.Delete;
+import miage.reseau.projet.commands.Exists;
+import miage.reseau.projet.commands.Expire;
+import miage.reseau.projet.commands.Get;
+import miage.reseau.projet.commands.Increment;
+import miage.reseau.projet.commands.Info;
+import miage.reseau.projet.commands.Set;
+import miage.reseau.projet.commands.Setnx;
+import miage.reseau.projet.commands.Strlen;
 import miage.reseau.projet.server.Server;
 
 /**
@@ -15,8 +26,7 @@ public class Main {
     public static void main(String[] args) {
 
         Server server = new Server();
-        server.getCommands().initializeCommands(commands->
-        {
+        server.getCommands().initializeCommands(commands -> {
             commands.addCommand(new Info(server));
             commands.addCommand(new Set(server));
             commands.addCommand(new Setnx(server));

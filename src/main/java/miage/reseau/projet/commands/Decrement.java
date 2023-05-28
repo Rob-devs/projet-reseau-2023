@@ -4,6 +4,9 @@ import miage.reseau.projet.server.Server;
 import miage.reseau.projet.server.Value;
 import miage.reseau.projet.utils.Constants;
 import miage.reseau.projet.utils.LogBuilder;
+
+import java.util.Arrays;
+
 import miage.reseau.projet.commands.command.Command;
 import miage.reseau.projet.resp.ContentRESP;
 import miage.reseau.projet.resp.TypeRESP;
@@ -20,8 +23,9 @@ public class Decrement implements Command {
     /**
      * This function checks if a given request matches a specific command name.
      *
-     * @param request An object of type ContentRESP, which is being passed as a parameter to the
-     * matches() method.
+     * @param request An object of type ContentRESP, which is being passed as a
+     *                parameter to the
+     *                matches() method.
      * @return A boolean value is being returned.
      */
     @Override
@@ -40,7 +44,7 @@ public class Decrement implements Command {
         ContentRESP errorResponse = new ContentRESP(TypeRESP.ERROR, LogBuilder.getArgumentsErrorMessage(commandName));
 
         if (requestData.length < 2) {
-          return errorResponse;
+            return errorResponse;
         }
 
         String key = (String) requestData[1].getContent();
@@ -60,3 +64,4 @@ public class Decrement implements Command {
         }
 
     }
+}
